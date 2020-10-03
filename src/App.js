@@ -5,26 +5,40 @@ import "antd/dist/antd.css";
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import Home from './components/Home';
+import ProductosList from './components/ProductosList';
+import ProductosForm from './components/ProductosForm';
+import Contactos from './components/Contactos';
 import About from './components/About';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { AppstoreOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
+import Button from 'antd/lib/button/button';
 
 const { SubMenu } = Menu;
 const { Header, Footer, Content } = Layout;
 
-
 function AppMenu() {
   const [current, setCurrent] = useState()
   return (
-    // Definicion del menu principal
+
+// DEFINICION DE LA ESTRUCTURA DEL MENU PRINCIPAL - BARRA DE ARRIBA
     <Menu onClick={(value) => setCurrent(value)} selectedKeys={[current]} mode="horizontal">
       <Menu.Item key="home" icon={<AppstoreOutlined />}>
         <Link to="/">Home</Link>
       </Menu.Item>
-      <SubMenu key="tasks" icon={<AppstoreOutlined />} title="Tasks">
+
+      {/* <SubMenu key="tasks" icon={<AppstoreOutlined />} title="Tasks">
         <Menu.Item key="tasks:1"><Link to="/tasks">Tasks</Link></Menu.Item>
         <Menu.Item key="tasks:2"><Link to="/tasks/new">New Task</Link></Menu.Item>
+      </SubMenu> */}
+
+      <SubMenu key="productos" icon={<AppstoreOutlined />} title="Productos">
+        <Menu.Item key="productos:1"><Link to="/productos">Productos</Link></Menu.Item>
+        <Menu.Item key="productos:2"><Link to="/productos/new">Nuevo Producto</Link></Menu.Item>
       </SubMenu>
+
+      <Menu.Item key="contactos" icon={<AppstoreOutlined />}>
+        <Link to="/contactos">Contactos</Link>
+      </Menu.Item>
       <Menu.Item key="about" icon={<AppstoreOutlined />}>
         <Link to="/about">About</Link>
       </Menu.Item>
@@ -32,7 +46,8 @@ function AppMenu() {
   );
 }
 
-function TaskRoutes({ match }) {
+//EJEMPLO DE TASK PARA GUIARNOS
+/* function TaskRoutes({ match }) {
   return (
     <>
       <Route exact path={`${match.path}/new`} component={TaskForm} />
@@ -44,37 +59,56 @@ function TaskRoutes({ match }) {
       <Route exact path={`${match.path}/`} component={TaskList} />
     </>
   );
+} */
+
+//DEFINIR RUTAS DE PRODUCTOS
+function ProductosRoutes(props) {
+  return (
+    <>
+      <Route exact path={`${props.match.path}/new`} component={ProductosForm} />
+      <Route
+        exact
+        path={`${props.match.path}/edit/:typeID`}
+        component={ProductosForm}
+      />
+      <Route exact path={`${props.match.path}/`} component={ProductosList} />
+    </>
+  );
 }
 
+//ESTRUCTURA DE LA PÁGINA EN SÍ
 function App() {
   return (
-      <Router>
-        <Layout>
-          <Header style={{ color: 'white' , fontSize: 30, textAlign: 'center'}}>
-              <div>ToDo List</div>
-          </Header>
-          <Content>
-              
-              <div className="site-layout-content">
-                  <AppMenu/>
-                  <br/>
-                  {/* Secccion donde se van a mostrar los diferentes componentes que rendericemos */}
-                  <>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/about" component={About} />
-                    {/* Hacemos esto porque tasks tiene subrutas */}
-                    <Route path="/tasks" component={TaskRoutes} />
-                  </>
-              </div>
-          </Content>
-          <Footer style={{textAlign: 'center'}}>
-              <p>Teléfono</p>
-              <p>Dirección</p>
-              <p>Ciudad - País</p>
-          </Footer>
-        </Layout>
-      </Router>
-      
+    <Router>
+      <Layout>
+        <Header style={{ color: 'white', fontSize: 30, textAlign: 'center' }}>
+          <div>ToDo List</div>
+        </Header>
+
+        <Content>
+          <div className="site-layout-content">
+            <AppMenu />
+            <br />
+            {/* Secccion donde se van a mostrar los diferentes componentes que rendericemos */}
+            <>
+              <Route path="/" exact component={Home} />
+              <Route path="/productos" component={ProductosRoutes} />
+              <Route path="/contactos" component={Contactos} />
+              <Route path="/about" component={About} />
+              {/* Hacemos esto porque tasks tiene subrutas */}
+              {/* <Route path="/tasks" component={TaskRoutes} /> */}
+            </>
+          </div>
+        </Content>
+
+        <Footer style={{ textAlign: 'center' }}>
+          <p>Teléfono</p>
+          <p>Dirección</p>
+          <p>Ciudad - País</p>
+        </Footer>
+      </Layout>
+    </Router>
+
   );
 }
 
