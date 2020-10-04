@@ -103,6 +103,7 @@ function ProveedoresList (props) {
                 </Tooltip>
                 </Col>
             </Row>
+            
             <Table pagination={{ defaultCurrent:1, pageSize: 5, total:proveedores.length }} columns={columns} dataSource={proveedores} />
         </div>
     )
