@@ -7,6 +7,7 @@ import TaskForm from './components/TaskForm';
 import Home from './components/Home';
 import ProductosList from './components/ProductosList';
 import ProductosForm from './components/ProductosForm';
+import ProveedoresList from './components/ProveedoresList';
 import Contactos from './components/Contactos';
 import About from './components/About';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
@@ -42,6 +43,12 @@ function AppMenu() {
       <SubMenu key="categorias" icon={<AppstoreOutlined />} title="Categorias">
         <Menu.Item key="categorias:1"><Link to="/categorias">Categorías</Link></Menu.Item>
         <Menu.Item key="categorias:2"><Link to="/categorias/new">Nueva Categoría</Link></Menu.Item>
+      </SubMenu>
+
+{/* proveedores*/}
+<SubMenu key="proveedores" icon={<AppstoreOutlined />} title="Proveedores">
+        <Menu.Item key="proveedores:1"><Link to="/proveedores">Proveedores</Link></Menu.Item>
+        <Menu.Item key="proveedores:2"><Link to="/proveedores/new">Nuevo Proveedor</Link></Menu.Item>
       </SubMenu>
 
 
@@ -98,6 +105,21 @@ function CategoriaRoutes(props) {
   );
 }
 
+
+function ProveedoresRoutes(props) {
+  return (
+    <>
+      {/* <Route exact path={`${props.match.path}/new`} component={CategoriaForm} />
+      <Route
+        exact
+        path={`${props.match.path}/edit/:typeID`}
+        component={CategoriaForm} 
+      />  */}
+      <Route exact path={`${props.match.path}/`} component={ProveedoresList} />
+    </>
+  );
+}
+
 //ESTRUCTURA DE LA PÁGINA EN SÍ
 function App() {
   return (
@@ -116,6 +138,7 @@ function App() {
               <Route path="/" exact component={Home} />
               <Route path="/productos" component={ProductosRoutes} />
               <Route path="/categorias" component={CategoriaRoutes} />
+              <Route path="/proveedores" component={ProveedoresRoutes} />
               <Route path="/contactos" component={Contactos} />
               <Route path="/about" component={About} />
               {/* Hacemos esto porque tasks tiene subrutas */}
