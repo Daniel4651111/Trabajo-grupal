@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Row, Col, Space, Tooltip, Button } from 'antd';
+import { Table, Row, Col, Space} from 'antd';
 import { EditFilled, DeleteFilled, PlusOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import axios from 'axios';
+import { Menu, Dropdown, Button, message, Tooltip } from 'antd';
+import { DownOutlined, UserOutlined } from '@ant-design/icons';
 
 function ProveedoresList (props) {
 
@@ -90,20 +92,6 @@ function ProveedoresList (props) {
 
     return (
         <div>
-        <h1>Conoce a nuestros proveedores...</h1>
-            <Row style={{ padding: 20 }}>
-                <Col span={22}></Col>
-                <Col span={2}>
-                <Tooltip title="New">
-                    <Button 
-                        type="primary" 
-                        shape="round" 
-                        onClick={() => props.history.push(`${props.match.url}/new`)}
-                        icon={<PlusOutlined />}>New proveedor</Button>
-                </Tooltip>
-                </Col>
-            </Row>
-
             <Table pagination={{ defaultCurrent:1, pageSize: 5, total:proveedores.length }} columns={columns} dataSource={proveedores} />
         </div>
     )
