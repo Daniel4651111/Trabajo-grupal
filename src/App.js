@@ -7,14 +7,15 @@ import TaskForm from './components/TaskForm';
 import Home from './components/Home';
 import ProductosList from './components/ProductosList';
 import ProductosForm from './components/ProductosForm';
+import CategoriasList from './components/CategoriasList';
+import CategoriasForm from './components/CategoriasForm';
 import ProveedoresList from './components/ProveedoresList';
 import Contactos from './components/Contactos';
 import About from './components/About';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
 import Button from 'antd/lib/button/button';
-import CategoriaList from './components/CategoriasList';
-import CategoriaForm from './components/CategoriasForm';
+
 
 const { SubMenu } = Menu;
 const { Header, Footer, Content } = Layout;
@@ -91,16 +92,16 @@ function ProductosRoutes(props) {
     </>
   );
 }
-function CategoriaRoutes(props) {
+function CategoriasRoutes(props) {
   return (
     <>
-      <Route exact path={`${props.match.path}/new`} component={CategoriaForm} />
+      <Route exact path={`${props.match.path}/new`} component={CategoriasForm} />
       <Route
         exact
-        path={`${props.match.path}/edit/:typeID`}
-        component={CategoriaForm}
+        path={`${props.match.path}/edit/:categoriaID`}
+        component={CategoriasForm}
       />
-      <Route exact path={`${props.match.path}/`} component={CategoriaList} />
+      <Route exact path={`${props.match.path}/`} component={CategoriasList} />
     </>
   );
 }
@@ -137,7 +138,7 @@ function App() {
             <>
               <Route path="/" exact component={Home} />
               <Route path="/productos" component={ProductosRoutes} />
-              <Route path="/categorias" component={CategoriaRoutes} />
+              <Route path="/categorias" component={CategoriasRoutes} />
               <Route path="/proveedores" component={ProveedoresRoutes} />
               <Route path="/contactos" component={Contactos} />
               <Route path="/about" component={About} />
