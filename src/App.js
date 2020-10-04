@@ -77,7 +77,7 @@ function ProductosRoutes(props) {
       <Route exact path={`${props.match.path}/new`} component={ProductosForm} />
       <Route
         exact
-        path={`${props.match.path}/edit/:typeID`}
+        path={`${props.match.path}/edit/:productoID`}
         component={ProductosForm}
       />
       <Route exact path={`${props.match.path}/`} component={ProductosList} />
