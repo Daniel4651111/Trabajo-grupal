@@ -8,12 +8,14 @@ import Home from './components/Home';
 import ProductosList from './components/ProductosList';
 import ProductosForm from './components/ProductosForm';
 import Contactos from './components/Contactos';
+import Proveedores from './components/ProductosList';
 import About from './components/About';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
 import Button from 'antd/lib/button/button';
 import CategoriaList from './components/CategoriasList';
 import CategoriaForm from './components/CategoriasForm';
+import ProveedoresList from './components/ProveedoresList';
 
 const { SubMenu } = Menu;
 const { Header, Footer, Content } = Layout;
@@ -44,6 +46,12 @@ function AppMenu() {
         <Menu.Item key="categorias:2"><Link to="/categorias/new">Nueva Categoría</Link></Menu.Item>
       </SubMenu>
 
+
+{/* Proveedores */}
+<SubMenu key="Proveedores" icon={<AppstoreOutlined />} title="Proveedores">
+        <Menu.Item key="categorias:1"><Link to="/Proveedores">Proveedores</Link></Menu.Item>
+        <Menu.Item key="categorias:2"><Link to="/Proveedores/new">Nuevo Proveedor</Link></Menu.Item>
+      </SubMenu>
 
       <Menu.Item key="contactos" icon={<AppstoreOutlined />}>
         <Link to="/contactos">Contactos</Link>
@@ -98,6 +106,20 @@ function CategoriaRoutes(props) {
   );
 }
 
+function ProveedorRoutes(props) {
+  return (
+    <>
+      <Route exact path={`${props.match.path}/new`} component={ProveedoresForm} />
+      <Route
+        exact
+        path={`${props.match.path}/edit/:typeID`}
+        component={ProveedoresForm}
+      />
+      <Route exact path={`${props.match.path}/`} component={ProveedoresList} />
+    </>
+  );
+}
+
 //ESTRUCTURA DE LA PÁGINA EN SÍ
 function App() {
   return (
@@ -116,6 +138,7 @@ function App() {
               <Route path="/" exact component={Home} />
               <Route path="/productos" component={ProductosRoutes} />
               <Route path="/categorias" component={CategoriaRoutes} />
+              <Route path="/categorias" component={ProveedorRoutes} />
               <Route path="/contactos" component={Contactos} />
               <Route path="/about" component={About} />
               {/* Hacemos esto porque tasks tiene subrutas */}
