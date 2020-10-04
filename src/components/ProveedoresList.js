@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Table, Row, Col, Space, Tooltip, Button } from 'antd';
+import { EditFilled, DeleteFilled, PlusOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import axios from 'axios';
-import { Button, Tooltip } from 'antd';
 
 function ProveedoresList (props) {
 
-    const [proveedores, setTasks] = useState([]);
+    const [proveedores, setProveedores] = useState([]);
 
     const getProveedores = () => {
               axios.get('ws/rest/proveedores')
@@ -18,14 +19,14 @@ function ProveedoresList (props) {
     }
 
     useEffect(() => {
-        getTasks();
+        getProveedores();
     }, [])
 
     const deleteProveedor = id => {
         axios.delete(`/ws/rest/proveedor/${id}`)
             .then(res => {
                 alert(`Tarea con ID: ${id} borrada correctamente`);
-                getTasks();
+                getProveedores();
             })
             .catch(err => {
                 console.log(err);
@@ -96,7 +97,7 @@ function ProveedoresList (props) {
                 </Tooltip>
                 </Col>
             </Row>
-            <Table pagination={{ defaultCurrent:1, pageSize: 5, total:tasks.length }} columns={columns} dataSource={proveedores} />
+            <Table pagination={{ defaultCurrent:1, pageSize: 5, total:proveedores.length }} columns={columns} dataSource={proveedores} />
         </div>
     )
 }

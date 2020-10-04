@@ -109,12 +109,12 @@ function CategoriaRoutes(props) {
 function ProveedorRoutes(props) {
   return (
     <>
-      <Route exact path={`${props.match.path}/new`} component={ProveedoresForm} />
+      {/* <Route exact path={`${props.match.path}/new`} component={ProveedoresForm} />
       <Route
         exact
         path={`${props.match.path}/edit/:typeID`}
         component={ProveedoresForm}
-      />
+      /> */}
       <Route exact path={`${props.match.path}/`} component={ProveedoresList} />
     </>
   );
