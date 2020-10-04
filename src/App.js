@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { Layout, Menu } from 'antd';
 import "antd/dist/antd.css";
+import Button from 'antd/lib/button/button';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import Home from './components/Home';
@@ -14,7 +15,7 @@ import Contactos from './components/Contactos';
 import About from './components/About';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
-import Button from 'antd/lib/button/button';
+
 
 
 const { SubMenu } = Menu;
