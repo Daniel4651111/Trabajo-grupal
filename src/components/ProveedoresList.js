@@ -45,19 +45,24 @@ function ProveedoresList (props) {
           key: 'name'
         },
         {
-          title: 'Description',
-          dataIndex: 'description',
-          key: 'description',
+          title: 'Razón Social',
+          dataIndex: 'razon social',
+          key: 'razon social',
         },
         {
-          title: 'Type',
-          key: 'type',
-          dataIndex: 'type',
-          render: type => (
-            <>
-              {type && type.name}
-            </>
-          ),
+          title: 'Direccion',
+          key: 'direccion',
+          dataIndex: 'direccion',
+        },
+        {
+            title: 'Representante',
+            key: 'representante',
+            dataIndex: 'representante',
+        },
+        {
+            title: 'Email',
+            key: 'email',
+            dataIndex: 'email',
         },
         {
           title: 'Actions',
@@ -85,6 +90,7 @@ function ProveedoresList (props) {
 
     return (
         <div>
+        <h1>Conoce a nuestros proveedores...</h1>
             <Row style={{ padding: 20 }}>
                 <Col span={22}></Col>
                 <Col span={2}>

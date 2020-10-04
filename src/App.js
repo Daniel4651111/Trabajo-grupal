@@ -49,8 +49,8 @@ function AppMenu() {
 
 {/* Proveedores */}
 <SubMenu key="Proveedores" icon={<AppstoreOutlined />} title="Proveedores">
-        <Menu.Item key="categorias:1"><Link to="/Proveedores">Proveedores</Link></Menu.Item>
-        <Menu.Item key="categorias:2"><Link to="/Proveedores/new">Nuevo Proveedor</Link></Menu.Item>
+        <Menu.Item key="proveedores:1"><Link to="/Proveedores">Proveedores</Link></Menu.Item>
+        <Menu.Item key="proveedores:2"><Link to="/Proveedores/new">Nuevo Proveedor</Link></Menu.Item>
       </SubMenu>
 
       <Menu.Item key="contactos" icon={<AppstoreOutlined />}>
@@ -138,7 +138,7 @@ function App() {
               <Route path="/" exact component={Home} />
               <Route path="/productos" component={ProductosRoutes} />
               <Route path="/categorias" component={CategoriaRoutes} />
-              <Route path="/categorias" component={ProveedorRoutes} />
+              <Route path="/proveedores" component={ProveedorRoutes} />
               <Route path="/contactos" component={Contactos} />
               <Route path="/about" component={About} />
               {/* Hacemos esto porque tasks tiene subrutas */}
