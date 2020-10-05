@@ -79,7 +79,7 @@ function CategoriasList(props) {
             titulo: "Mascotas",
         },
         {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/3081/3081788.svg",
+            linkImag: "https://www.flaticon.es/svg/static/icons/svg/1987/1987581.svg",
             titulo: "Cosméticos",
         },
         {
