@@ -49,8 +49,7 @@ function AppMenu() {
 
 {/* proveedores*/}
 <SubMenu key="proveedores" icon={<AppstoreOutlined />} title="Proveedores">
-        <Menu.Item key="proveedores:1"><Link to="/proveedores">Proveedores</Link></Menu.Item>
-        <Menu.Item key="proveedores:2"><Link to="/proveedores/new">Nuevo Proveedor</Link></Menu.Item>
+        <Menu.Item key="proveedores:1"><Link to="/proveedores">Lista de proveedores</Link></Menu.Item>
       </SubMenu>
 
 
