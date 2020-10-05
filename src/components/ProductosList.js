@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Avatar, Rate, Tag, Space, Tooltip, Button } from 'antd';
+import { Row, Col, Card, Avatar, Rate, Tag, Space, Tooltip, Button, Pagination } from 'antd';
 
 import moment from 'moment';
 import axios from 'axios';
-import { DeleteFilled, EditFilled, EditOutlined, EllipsisOutlined, FolderOutlined, PlusOutlined, SettingOutlined } from '@ant-design/icons';
+import { DeleteFilled, EditFilled, EditOutlined, EllipsisOutlined, FolderOutlined, PlusOutlined, SearchOutlined, SettingOutlined } from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
 
 
@@ -13,7 +13,7 @@ function ProductosList(props) {
 
     const getProductos = () => {
         // axios.get('ws/rest/productos/paginated', { params: { pageSize: 2, first: 0 }})
-        axios.get('ws/rest/productos')
+        axios.get('proyecto_upa/rest/productos')
             .then(res => {
                 setProductos(res.data);
             })
@@ -27,7 +27,7 @@ function ProductosList(props) {
     }, [])
 
     const deleteProducto = id => {
-        axios.delete(`/ws/rest/productos/${id}`)
+        axios.delete(`/proyecto_upa/rest/productos/${id}`)
             .then(res => {
                 alert(`EL producto con el ID ${id} ha sido borrado correctamente`);
                 getProductos();
@@ -39,51 +39,62 @@ function ProductosList(props) {
 
     const cards = [
         {
-            nombreImag: 'nombreImag',
-            linkImag: "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-            titulo: "Card title",
-            descripcion: "This is the description",
-            precio: '45678',
-            categoria: " Categoria",
+            nombreImag: 'jugueteCocina',
+            linkImag: "https://i.pinimg.com/originals/a4/ee/b1/a4eeb1af248f986d9face8e5007b661e.jpg",
+            titulo: "COCINA AUTHOGAR",
+            descripcion: "Para niños de 8 a 12 años.",
+            precio: '200.000 Gs',
+            categoria: " Juguete",
         },
         {
-            nombreImag: 'nombreImag',
-            linkImag: "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-            titulo: "Card title",
-            descripcion: "This is the description",
-            precio: '45678',
-            categoria: " Categoria",
+            nombreImag: 'panificadoBimbo',
+            linkImag: "https://maxiconsumo.com/pub/media/catalog/product/cache/8721ae71a8b276de5ff5b8923d829701/3/4/34350.jpg",
+            titulo: "PANIFICADO BIMBO - ARTESANO",
+            descripcion: "Pan tipo Artesano - Panchas.",
+            precio: '20.000 Gs.',
+            categoria: " Panificados",
         },
         {
-            nombreImag: 'nombreImag',
-            linkImag: "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-            titulo: "Card title",
-            descripcion: "This is the description",
-            precio: '45678',
-            categoria: " Categoria",
+            nombreImag: 'repollo',
+            linkImag: "https://hydroenv.com.mx/catalogo/images/00/hortalizas/Hortalizas_hibridas/hortalizas_OP/col.jpg",
+            titulo: "REPOLLO",
+            descripcion: "Repollos frescos - De la granja a tu casa.",
+            precio: '15.000 Gs.',
+            categoria: " Vegetales",
         },
         {
-            nombreImag: 'nombreImag',
-            linkImag: "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-            titulo: "Card title",
-            descripcion: "This is the description",
-            precio: '45678',
-            categoria: " Categoria",
+            nombreImag: 'alimentosPerros',
+            linkImag: "https://sofiaalpaso.com/site/wp-content/uploads/2018/12/Alimento-Canino-Adulto-Raza-Mediana-Grande-23.jpg",
+            titulo: "PODIUM - ALIMENTO PARA PERROS",
+            descripcion: "Alimento para perros - 1kg.",
+            precio: '30.000 Gs.',
+            categoria: " Mascotas",
         },
     ]
 
     return (
 
         <div>
+            <h1><b>CATALOGO DE PRODUCTOS</b></h1>
             <div align={'right'}>
-                <Tooltip title="Nuevo">
-                    <Button
-                        type="primary"
-                        shape="round"
-                        onClick={() => props.history.push(`${props.match.url}/new`)}
-                        icon={<PlusOutlined />}>Nuevo Producto
-                </Button>
-                </Tooltip>
+                <Space>
+                    <Tooltip title="Nuevo">
+                        <Button
+                            type="primary"
+                            shape="round"
+                            onClick={() => props.history.push(`${props.match.url}/new`)}
+                            icon={<PlusOutlined />}>Nuevo Producto
+                        </Button>
+                    </Tooltip>
+                    <Tooltip title="Búsqueda">
+                        <Button
+                            type="primary"
+                            shape="round"
+                            icon={<SearchOutlined />}>
+                            Buscar producto
+                        </Button>
+                    </Tooltip>
+                </Space>
             </div>
             <br></br>
             <div>
@@ -91,49 +102,64 @@ function ProductosList(props) {
                     {cards.map(card => {
                         return (
                             <Col span={6}>
-                                <Card
-                                    style={{ width: 300 }}
-                                    cover={
-                                        <img
-                                            alt={card.nombreImag}
-                                            src={card.linkImag}
-                                        />
-                                    }
-                                // actions={[
-                                //     <SettingOutlined key="setting" />,
-                                //     <EditOutlined key="edit" />,
-                                //     <EllipsisOutlined key="ellipsis" />,
-                                // ]}
-                                >
-                                    <Meta
-                                        title={card.titulo}
-                                        description={card.descripcion}
-                                    /><br></br>
-                                    <p>{card.precio}</p>
-                                    <div><Tag><FolderOutlined /> {card.categoria}</Tag></div>
-                                    <Rate /><br></br>
-                                    <Space>
-                                        <Tooltip title="Edit">
-                                            <Button
-                                                type="primary"
-                                                shape="circle"
-                                                //onClick={() => props.history.push(`${props.match.url}/edit/${record.id}`)} 
-                                                icon={<EditFilled />} />
-                                        </Tooltip>
-                                        <Tooltip title="Delete">
-                                            <Button
-                                                type="danger"
-                                                shape="circle"
-                                                //onClick={() => deleteProducto(record.id)}
-                                                icon={<DeleteFilled />} />
-                                        </Tooltip>
-                                    </Space>
+                                {/* AJUSTAR CONTENIDO ACÁ */}
+                                <div style={{ height: 450 }}>
+                                    <Card
+                                        style={{ width: 300 }}
+                                        cover={
+                                            <img
+                                                alt={card.nombreImag}
+                                                src={card.linkImag}
+                                                style={{ height: 200 }} //VER COMO HACER AJUSTABLE                                            
+                                            />
+                                        }
+                                    // actions={[
+                                    //     <SettingOutlined key="setting" />,
+                                    //     <EditOutlined key="edit" />,
+                                    //     <EllipsisOutlined key="ellipsis" />,
+                                    // ]}
+                                    >
+                                        <div><Tag><FolderOutlined /> {card.categoria}</Tag></div><br></br>
+                                        <Meta
+                                            title={card.titulo}
+                                            description={card.descripcion}
+                                        /><br></br>
+                                        <p>{card.precio}</p>
+                                        <Rate /><br></br>
+                                        <div align='center'>
+                                            <br></br>
+                                            <Space>
+                                                <Tooltip title="Nuevo">
+                                                    <Button
+                                                        type="primary"
+                                                        shape="round"
+                                                        icon={<PlusOutlined />}>Agregar al carrito
+                                                    </Button>
+                                                </Tooltip>
+                                                <Tooltip title="Edit">
+                                                    <Button
+                                                        type="primary"
+                                                        shape="circle"
+                                                        //onClick={() => props.history.push(`${props.match.url}/edit/${record.id}`)} 
+                                                        icon={<EditFilled />} />
+                                                </Tooltip>
+                                                <Tooltip title="Delete">
+                                                    <Button
+                                                        type="danger"
+                                                        shape="circle"
+                                                        //onClick={() => deleteProducto(record.id)}
+                                                        icon={<DeleteFilled />} />
+                                                </Tooltip>
+                                            </Space>
+                                        </div>
 
-                                </Card>
+                                    </Card>
+                                </div>
                             </Col>
                         )
                     })}
-                </Row>
+                </Row> 
+               <br></br><div align = 'center'><Pagination defaultCurrent={6} total={50} /></div>
             </div>
         </div>
 
