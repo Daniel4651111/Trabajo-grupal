@@ -8,14 +8,13 @@ import Home from './components/Home';
 import ProductosList from './components/ProductosList';
 import ProductosForm from './components/ProductosForm';
 import Contactos from './components/Contactos';
-import Proveedores from './components/ProductosList';
+import ProveedoresList from './components/ProductosList';
 import About from './components/About';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
 import Button from 'antd/lib/button/button';
 import CategoriaList from './components/CategoriasList';
 import CategoriaForm from './components/CategoriasForm';
-import ProveedoresList from './components/ProveedoresList';
 
 const { SubMenu } = Menu;
 const { Header, Footer, Content } = Layout;
@@ -49,8 +48,7 @@ function AppMenu() {
 
 {/* Proveedores */}
 <SubMenu key="Proveedores" icon={<AppstoreOutlined />} title="Proveedores">
-        <Menu.Item key="proveedores:1"><Link to="/Proveedores">Proveedores</Link></Menu.Item>
-        <Menu.Item key="proveedores:2"><Link to="/Proveedores/new">Nuevo Proveedor</Link></Menu.Item>
+        <Menu.Item key="proveedores:1"><Link to="/Proveedores">Lista de proveedores</Link></Menu.Item>
       </SubMenu>
 
       <Menu.Item key="contactos" icon={<AppstoreOutlined />}>
