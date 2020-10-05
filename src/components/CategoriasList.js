@@ -44,7 +44,7 @@ function CategoriasList(props) {
         },
         {
             linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372230.svg",
-            titulo: "Panificados",
+            titulo: "Panadería",
         },
         {
             linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372295.svg",
@@ -53,10 +53,6 @@ function CategoriasList(props) {
         {
             linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372217.svg",
             titulo: "Bebidas con alcohol",
-        },
-        {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372301.svg",
-            titulo: "Vegetales ?",
         },
         {
             linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372284.svg",
@@ -83,6 +79,10 @@ function CategoriasList(props) {
             titulo: "Cosméticos",
         },
         {
+            linkImag: "https://www.flaticon.es/svg/static/icons/svg/135/135001.svg",
+            titulo: "Juguetería",
+        },
+        {
             linkImag: "https://www.flaticon.es/svg/static/icons/svg/2856/2856419.svg",
             titulo: "Ropería",
         },
@@ -105,11 +105,13 @@ function CategoriasList(props) {
                 <Row gutter={[25, 25]}>
                     {cards.map(card => {
                         return (
-                            <Col span={4}>
-                                <Card
+                            <Col span={4}> 
+                           
+                                <Card 
                                     style={{ width: 200 }}
                                     cover={
-                                        <Image Align="center"
+                                       < div className ="imagen">
+                                        <Image
                                             // NO SÉ COMO PONER EN EL CENTRO!
                                             //className ="imagen"
                                             // style={{ Align: "center" }} 
@@ -117,9 +119,10 @@ function CategoriasList(props) {
                                             alt={card.nombreImag}
                                             src={card.linkImag}
                                         />
+                                        </div>
                                     }
                                 >
-                                    <Meta
+                                    <Meta style={{ textAlign: "center" }} 
                                         title={card.titulo}
                                     /><br></br>
 
@@ -141,6 +144,7 @@ function CategoriasList(props) {
                                     </Space>
 
                                 </Card>
+                               
                             </Col>
                         )
                     })}

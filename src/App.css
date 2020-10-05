@@ -55,6 +55,10 @@ h1{
   text-align: center;
   
 }
-/* .imagen {
+.imagen {
   text-align: center;
-} */
+  padding-top: 20px;
+}
+.Image {
+  text-align: center;
+}
