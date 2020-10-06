@@ -127,7 +127,7 @@ function App() {
     <Router>
       <Layout>
         <Header style={{ color: 'white', fontSize: 30, textAlign: 'center' }}>
-          <div>ToDo List</div>
+          <div>Das Kaufhaus</div>
         </Header>
 
         <Content>
@@ -149,9 +149,9 @@ function App() {
         </Content>
 
         <Footer style={{ textAlign: 'center' }}>
-          <p>Teléfono</p>
-          <p>Dirección</p>
-          <p>Ciudad - País</p>
+          <p>0981-123-456</p>
+          <p>das_kaufhaus@gmail.com</p>
+          <p>Asuncion - Paraguay</p>
         </Footer>
       </Layout>
     </Router>
