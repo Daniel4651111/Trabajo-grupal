@@ -1,15 +1,15 @@
 import { DeleteFilled, EditFilled, EditOutlined, EllipsisOutlined, FolderOutlined, PlusOutlined, SettingOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Rate, Row, Space, Table, Tag, Tooltip, Image } from 'antd';
+import { Button, Card, Col, Rate, Row, Space, Table, Tag, Tooltip, Image, Pagination } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 function CategoriasList(props) {
 
-    const [types, setCategorias] = useState([]);
+    const [categorias, setCategorias] = useState([]);
 
     const getCategorias = () => {
-        axios.get('/ws/rest/categorias')
+        axios.get('proyecto_upa/rest/categorias')
             .then(res => {
                 setCategorias(res.data);
             })
@@ -22,74 +22,93 @@ function CategoriasList(props) {
 
         getCategorias();
     })
-
-    const deleteCategoria = (id) => {
-        console.log('DeleteCategoria ID: ' + id);
-        //otra opcion es:
-        //  axios.delete ('/ws/rest/types/$ {id}')
-        axios.delete('/ws/rest/categorias/' + id)
-            .then((res) => {
-                alert('Categoría Eliminada');
+    //ver
+    const deleteCategoria = id => {
+        axios.delete(`/proyecto_upa/rest/categorias/${id}`)
+            .then(res => {
+                alert(`La categoria con el ID ${id} ha sido borrado correctamente`);
                 getCategorias();
             })
-        //  .catch(err => {
-        //     alert('No se puede eliminar la categoria');
-        //    console.log(err);
-        // });
-    }
-    const cards = [
-        {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372138.svg",
-            titulo: "Lácteos",
-        },
-        {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372230.svg",
-            titulo: "Panadería",
-        },
-        {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372295.svg",
-            titulo: "Carnicería",
-        },
-        {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372217.svg",
-            titulo: "Bebidas con alcohol",
-        },
-        {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372284.svg",
-            titulo: "Verdulería",
-        },
-        {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372149.svg",
-            titulo: "Bebidas sin alcohol",
-        },
-        {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372150.svg",
-            titulo: "Frutería",
-        },
-        {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372196.svg",
-            titulo: "Limpieza",
-        },
-        {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372182.svg",
-            titulo: "Mascotas",
-        },
-        {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/1987/1987581.svg",
-            titulo: "Cosméticos",
-        },
-        {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/135/135001.svg",
-            titulo: "Juguetería",
-        },
-        {
-            linkImag: "https://www.flaticon.es/svg/static/icons/svg/2856/2856419.svg",
-            titulo: "Ropería",
-        },
-    ]
+            .catch(err => {
+                console.log(err);
+            });
+    };
+    // const cards = [
+    //     {
+    //         linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372138.svg",
+    //         titulo: "Lácteos",
+    //     },
+    //     {
+    //         linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372230.svg",
+    //         titulo: "Panadería",
+    //     },
+    //     {
+    //         linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372295.svg",
+    //         titulo: "Carnicería",
+    //     },
+    //     {
+    //         linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372217.svg",
+    //         titulo: "Bebidas con alcohol",
+    //     },
+    //     {
+    //         linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372284.svg",
+    //         titulo: "Verdulería",
+    //     },
+    //     {
+    //         linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372149.svg",
+    //         titulo: "Bebidas sin alcohol",
+    //     },
+    //     {
+    //         linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372150.svg",
+    //         titulo: "Frutería",
+    //     },
+    //     {
+    //         linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372196.svg",
+    //         titulo: "Limpieza",
+    //     },
+    //     {
+    //         linkImag: "https://www.flaticon.es/svg/static/icons/svg/2372/2372182.svg",
+    //         titulo: "Mascotas",
+    //     },
+    //     {
+    //         linkImag: "https://www.flaticon.es/svg/static/icons/svg/1987/1987581.svg",
+    //         titulo: "Cosméticos",
+    //     },
+    //     {
+    //         linkImag: "https://www.flaticon.es/svg/static/icons/svg/135/135001.svg",
+    //         titulo: "Juguetería",
+    //     },
+    //     {
+    //         linkImag: "https://www.flaticon.es/svg/static/icons/svg/2856/2856419.svg",
+    //         titulo: "Ropería",
+    //     },
+    // ]
+
+    // const categoria = [
+
+    //     {
+    //         title: 'Imagen',
+    //         dataIndex: 'url',
+    //         key: 'url'
+    //     },
+    //     {
+    //         title: 'ID',
+    //         dataIndex: 'id',
+    //         key: 'id'
+    //     },
+
+    //     {
+    //         title: 'Nombre',
+    //         dataIndex: 'nombre',
+    //         key: 'nombre'
+    //     },
+
+    // ]
+
     return (
 
         <div>
+            <h1><b>CATEGORÍAS</b></h1>
             <div align={'right'}>
                 <Tooltip title="Nuevo">
                     <Button
@@ -103,52 +122,50 @@ function CategoriasList(props) {
             <br></br>
             <div>
                 <Row gutter={[25, 25]}>
-                    {cards.map(card => {
+                    {categorias.map(categoria => {
                         return (
-                            <Col span={4}> 
-                           
-                                <Card 
+                            <Col span={4}>
+
+                                <Card
                                     style={{ width: 200 }}
                                     cover={
-                                       < div className ="imagen">
-                                        <Image
-                                            // NO SÉ COMO PONER EN EL CENTRO!
-                                            //className ="imagen"
-                                            // style={{ Align: "center" }} 
-                                            width={60}
-                                            alt={card.nombreImag}
-                                            src={card.linkImag}
-                                        />
+                                        < div className="imagen">
+                                            <Image
+                                                width={60}
+                                                src={categoria.url}
+                                            />
                                         </div>
                                     }
                                 >
-                                    <Meta style={{ textAlign: "center" }} 
-                                        title={card.titulo}
+                                    <Meta style={{ textAlign: "center" }}
+                                        title={categoria.nombre}
                                     /><br></br>
-
-                                    <Space>
-                                        <Tooltip title="Edit">
-                                            <Button
-                                                type="primary"
-                                                shape="circle"
-                                                //onClick={() => props.history.push(`${props.match.url}/edit/${record.id}`)} 
-                                                icon={<EditFilled />} />
-                                        </Tooltip>
-                                        <Tooltip title="Delete">
-                                            <Button
-                                                type="danger"
-                                                shape="circle"
-                                                //onClick={() => deleteCategoria(record.id)}
-                                                icon={<DeleteFilled />} />
-                                        </Tooltip>
-                                    </Space>
+                                    <div align={'center'}>
+                                        <Space>
+                                            <Tooltip title="Edit">
+                                                <Button
+                                                    type="primary"
+                                                    shape="circle"
+                                                    onClick={() => props.history.push(`${props.match.url}/edit/${categoria.id}`)}
+                                                    icon={<EditFilled />} />
+                                            </Tooltip>
+                                            <Tooltip title="Delete">
+                                                <Button
+                                                    type="danger"
+                                                    shape="circle"
+                                                    onClick={() => deleteCategoria(categoria.id)}
+                                                    icon={<DeleteFilled />} />
+                                            </Tooltip>
+                                        </Space>
+                                    </div>
 
                                 </Card>
-                               
+
                             </Col>
                         )
                     })}
                 </Row>
+                {/* <br></br><div align = 'center'><Card Pagination = {{defaultCurrent:1, pageSize: 5, total:categoria.length}} columns={categoria} dataSource={categoria}/> </div> */}
             </div>
         </div>
 
