@@ -8,7 +8,7 @@ function CategoriasForm(props) {
     const [form] = Form.useForm();
 
     useEffect(() => {
-       
+
         if (props.match.params.categoriaID) {
             axios.get('/proyecto_upa/rest/categorias/' + props.match.params.categoriaID)
                 .then((res) => {
@@ -57,41 +57,47 @@ function CategoriasForm(props) {
     //Diseño del formulario
     return (
         <div>
-             <h1><b>Cargar un nueva categoría</b></h1>
-       
-        <Form
-            style={{ width: '60%', margin: '0 auto' }}
-            form={form}
-            layout="vertical"
-            name="basic"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-        >
-            <Form.Item
-                label="Nombre de la categoría"
-                name="nombre"
-                rules={[{ required: true, message: 'Required!' }]}
+            <h1><b>Cargar un nueva categoría</b></h1>
+
+            <Form
+                style={{ width: '60%', margin: '0 auto' }}
+                form={form}
+                layout="vertical"
+                name="basic"
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
             >
-                <Input />
-            </Form.Item>
+                <Form.Item
+                    label="Nombre de la categoría"
+                    name="nombre"
+                    rules={[{ required: true, message: 'Required!' }]}
+                >
+                    <Input placeholder="Nombre" />
+                </Form.Item>
+                <Form.Item
+                    label="URL de Imagen:"
+                    name="url"
+                    rules={[{ required: true, message: 'Required!' }]}
+                >
+                    <Input placeholder="URL" />
+                </Form.Item>
 
-
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Row>
-                    <Col span={12}>
-                        <Button type="default" onClick={() => props.history.push(`/categorias`)}>
-                            Cancel
+                <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                    <Row>
+                        <Col span={12}>
+                            <Button type="default" onClick={() => props.history.push(`/categorias`)}>
+                                Cancel
                         </Button>
-                    </Col>
-                    <Col span={12}>
-                        <Button type="primary" htmlType="submit">
-                            Submit
+                        </Col>
+                        <Col span={12}>
+                            <Button type="primary" htmlType="submit">
+                                Submit
                         </Button>
-                    </Col>
-                </Row>
-            </Form.Item>
-        </Form>
+                        </Col>
+                    </Row>
+                </Form.Item>
+            </Form>
         </div>
     )
 }
