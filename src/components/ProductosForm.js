@@ -3,18 +3,46 @@ import { Row, Col, Card, Avatar, Rate, Tag, Space, Tooltip, Button, Input, Selec
 
 import moment from 'moment';
 import axios from 'axios';
+import { Option } from 'antd/lib/mentions';
 
 function ProductosForm(props) {
 
+    const [categorias, setCategorias] = useState([]);
+    const [proveedores, setProveedores] = useState([]);
     const [form] = Form.useForm(); //De ANT, por debajo usa useStates
 
     useEffect(() => {
+        //Get Categorias
+        axios.get('/ws/rest/categorias')
+            .then(res => {
+                setCategorias(res.data)
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+        //Get Proveedores
+        axios.get('/ws/rest/proveedores')
+            .then(res => {
+                setProveedores(res.data)
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+        //Get EMPRESA????????
+
         console.log(props.match.params.productoID)
         if (props.match.params.productoID) {
             axios.get('/proyecto_upa/rest/productos/' + props.match.params.productoID)
-                .then((res) => {
-                    console.log(res.data);
-                    form.setFieldsValue(res.data); //Rellenar campos
+                .then((rsp) => {
+                    console.log(rsp.data);
+                    let productosForm = rsp.data;
+                    productosForm.categoria = productosForm.categoria ? productosForm.categoria.id : null;
+                    productosForm.proveedor = productosForm.proveedor ? productosForm.proveedor.id : null;
+                    productosForm.empresa = productosForm.empresa ? productosForm.empresa.id : null;
+                    // form.setFieldsValue(rsp.data); //Rellenar campos
+                    form.setFieldsValue(productosForm); //Rellenar campos                    
                 })
                 .catch((err) => {
                     console.log(err);
@@ -23,10 +51,19 @@ function ProductosForm(props) {
     }, []);
 
     //Envío del formulario: put o post
-    const submit = (productoForm) => {
+    const submit = (productosForm) => {
+        productosForm.categoria = {
+            id: productosForm.categoria
+        }
+        productosForm.proveedor = {
+            id: productosForm.proveedor
+        }
+        productosForm.empresa = {
+            id: productosForm.empresa
+        }
         //Actualizar
         if (props.match.productoID) {
-            axios.put('/proyecto_upa/rest/productos/' + props.match.productoID, productoForm)
+            axios.put('/proyecto_upa/rest/productos/' + props.match.productoID, productosForm)
                 .then((res) => {
                     console.log(res);
                     props.history.push('/productos');
@@ -37,13 +74,16 @@ function ProductosForm(props) {
         }
         //Crear
         else {
-            axios.post('/proyecto_upa/rest/productos', productoForm)
+            axios.post('/proyecto_upa/rest/productos', productosForm)
                 .then((res) => {
                     console.log(res);
+                    alert('exito')
                     props.history.push('/productos');
                 })
                 .catch((err) => {
                     console.log(err);
+                    alert('exito')
+                    props.history.push('/productos');
                 })
         }
     }
@@ -113,29 +153,35 @@ function ProductosForm(props) {
                     <InputNumber />
                 </Form.Item>
 
-                {/*OPCIÓN 1
-                             {/* COMO HACER ESTO PERO GUARDAR CON ID EN LA BD
-                            <Form.Item label="Categoría">
-                                <Select>
-                                    {/* VER COMO DAR LA LISTA DE OPCIONES 
-                                    <Select.Option value="demo">Categoría1</Select.Option> 
-                                </Select>
-                            </Form.Item> */}
-
                 <Form.Item
-                    label="Categoría a la que pertenece:"
-                    name="id_categoria" //idCategoria
+                    label="Categoría:"
+                    name="categoria"
                     rules={[{ required: true, message: 'Required!' }]}
                 >
-                    <InputNumber />
+                    <Select style={{ width: '100%' }} onChange={(value) => console.log('handleChangeSelect -> ' + value)}>
+                        {
+                            categorias.map(categoria => {
+                                return (
+                                    <Option key={categoria.id} value={categoria.id}>{categoria.nombre}</Option>
+                                )
+                            })
+                        }
+                    </Select>
                 </Form.Item>
 
                 <Form.Item
                     label="Proveedor:"
-                    name="id_1" //idCategoria
+                    name="proveedor"
                     rules={[{ required: true, message: 'Required!' }]}
-                >
-                    <InputNumber />
+                >                    <Select style={{ width: '100%' }} onChange={(value) => console.log('handleChangeSelect -> ' + value)}>
+                        {
+                            proveedores.map(proveedor => {
+                                return (
+                                    <Option key={proveedor.id} value={proveedor.id}>{proveedor.nombre}</Option>
+                                )
+                            })
+                        }
+                    </Select>
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

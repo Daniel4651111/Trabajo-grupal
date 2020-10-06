@@ -13,7 +13,7 @@ function ProductosList(props) {
 
     const getProductos = () => {
         // axios.get('ws/rest/productos/paginated', { params: { pageSize: 2, first: 0 }})
-        axios.get('proyecto_upa/rest/productos')
+        axios.get('proyecto_upa/rest/productos') //Peticiones al Backend
             .then(res => {
                 setProductos(res.data);
             })
@@ -99,7 +99,7 @@ function ProductosList(props) {
             <br></br>
             <div>
                 <Row gutter={[16, 16]}>
-                    {cards.map(card => {
+                    {productos.map(producto => {
                         return (
                             <Col span={6}>
                                 {/* AJUSTAR CONTENIDO ACÁ */}
@@ -108,23 +108,25 @@ function ProductosList(props) {
                                         style={{ width: 300 }}
                                         cover={
                                             <img
-                                                alt={card.nombreImag}
-                                                src={card.linkImag}
+                                                alt='imagen'
+                                                src={producto.url}
                                                 style={{ height: 200 }} //VER COMO HACER AJUSTABLE                                            
                                             />
                                         }
-                                    // actions={[
-                                    //     <SettingOutlined key="setting" />,
-                                    //     <EditOutlined key="edit" />,
-                                    //     <EllipsisOutlined key="ellipsis" />,
-                                    // ]}
                                     >
-                                        <div><Tag><FolderOutlined /> {card.categoria}</Tag></div><br></br>
+                                        {/* VER CON CATEGORIA */}
+                                        {/* <div><Tag><FolderOutlined /> {producto.categoria}</Tag></div><br></br>  */}
                                         <Meta
-                                            title={card.titulo}
-                                            description={card.descripcion}
+                                            title={producto.nombre}
+                                            description={producto.descripcion}
                                         /><br></br>
-                                        <p>{card.precio}</p>
+                                        {/* <p>{producto.precio_unitario}</p> */}
+                                        {/* <Button type="primary" onClick={this.toggle}>
+                                            Toggle disabled
+                                        </Button>
+                                        <Switch disabled={this.state.disabled} defaultChecked />
+                                        <br /> */}
+
                                         <Rate /><br></br>
                                         <div align='center'>
                                             <br></br>
@@ -140,29 +142,27 @@ function ProductosList(props) {
                                                     <Button
                                                         type="primary"
                                                         shape="circle"
-                                                        //onClick={() => props.history.push(`${props.match.url}/edit/${record.id}`)} 
+                                                        onClick={() => props.history.push(`${props.match.url}/edit/${producto.id}`)}
                                                         icon={<EditFilled />} />
                                                 </Tooltip>
                                                 <Tooltip title="Delete">
                                                     <Button
                                                         type="danger"
                                                         shape="circle"
-                                                        //onClick={() => deleteProducto(record.id)}
+                                                        onClick={() => deleteProducto(producto.id)}
                                                         icon={<DeleteFilled />} />
                                                 </Tooltip>
                                             </Space>
                                         </div>
-
                                     </Card>
                                 </div>
                             </Col>
                         )
                     })}
-                </Row> 
-               <br></br><div align = 'center'><Pagination defaultCurrent={6} total={50} /></div>
+                </Row>
+                <br></br><div align='center'><Pagination defaultCurrent={6} total={50} /></div>
             </div>
         </div>
-
 
     )
 }
