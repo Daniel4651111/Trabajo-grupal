@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Avatar, Rate, Tag, Space, Tooltip, Button, Input, Select, Form, InputNumber } from 'antd';
+import { Row, Col, Card, Avatar, Rate, Tag, Space, Tooltip, Button, Input, Select, Form, InputNumber, Switch } from 'antd';
 
 import moment from 'moment';
 import axios from 'axios';
@@ -33,13 +33,13 @@ function ProductosForm(props) {
 
         //Get EMPRESA????????
         axios.get('/proyecto_upa/rest/empresas')
-        .then(res => {
-            setEmpresas(res.data)
-        })
-        .catch(err => {
-            console.log(err);
-        });
-        
+            .then(res => {
+                setEmpresas(res.data)
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
     }, []);
 
     useEffect(() => {
@@ -70,9 +70,9 @@ function ProductosForm(props) {
         productosForm.proveedor = {
             id: productosForm.proveedor
         }
-        productosForm.empresa = {
-            id: productosForm.empresa
-        }
+        //productosForm.empresa = {
+        //    id: productosForm.empresa
+        //}
         //Actualizar
         if (props.match.productoID) {
             axios.put('/proyecto_upa/rest/productos/' + props.match.productoID, productosForm)
@@ -127,7 +127,7 @@ function ProductosForm(props) {
                     name="codigo"
                     rules={[{ required: true, message: 'Required!' }]}
                 >
-                    <Input />
+                    <Input placeholder="Código" />
                 </Form.Item>
 
                 <Form.Item
@@ -135,7 +135,7 @@ function ProductosForm(props) {
                     name="nombre"
                     rules={[{ required: true, message: 'Required!' }]}
                 >
-                    <Input />
+                    <Input placeholder="Nombre" />
                 </Form.Item>
 
                 <Form.Item
@@ -143,7 +143,7 @@ function ProductosForm(props) {
                     name="precioUnitario" //precio_unitario
                     rules={[{ required: true, message: 'Required!' }]}
                 >
-                    <InputNumber />
+                    <InputNumber placeholder="Precio" />
                 </Form.Item>
 
                 <Form.Item
@@ -151,18 +151,31 @@ function ProductosForm(props) {
                     name="descripcion"
                     rules={[{ required: true, message: 'Required!' }]}
                 >
-                    <Input />
+                    <Input placeholder="Descripción" />
                 </Form.Item>
 
-                {/* OFERTA */}
-                {/* FAVORITO */}
+                <Form.Item
+                    label="En Oferta"
+                    name="oferta"
+                    //rules={[{ required: true, message: 'Required!' }]}
+                >
+                    <Switch />
+                </Form.Item>
+
+                <Form.Item
+                    label="Favorito"
+                    name="favorito"
+                    //rules={[{ required: true, message: 'Required!' }]}
+                >
+                    <Switch />
+                </Form.Item>
 
                 <Form.Item
                     label="Cantidad en stock:"
                     name="cantidadStock" //cantidad_stock
                     rules={[{ required: true, message: 'Required!' }]}
                 >
-                    <InputNumber />
+                    <InputNumber placeholder="Cantidad en Stock" />
                 </Form.Item>
 
                 <Form.Item
@@ -170,11 +183,11 @@ function ProductosForm(props) {
                     name="categoria"
                     rules={[{ required: true, message: 'Required!' }]}
                 >
-                    <Select style={{ width: '100%' }} onChange={(value) => console.log('handleChangeSelect -> ' + value)}>
+                    <Select placeholder="Elija categoría" style={{ width: '100%' }} onChange={(value) => console.log('handleChangeSelect -> ' + value)}>
                         {
                             categorias.map(categoria => {
                                 return (
-                                    <Option key={categoria.id} value={categoria.id}>{categoria.nombre}</Option>
+                                    <Option key={categoria.id} value={categoria.id} >{categoria.nombre}</Option>
                                 )
                             })
                         }
@@ -185,7 +198,8 @@ function ProductosForm(props) {
                     label="Proveedor:"
                     name="proveedor"
                     rules={[{ required: true, message: 'Required!' }]}
-                >                    <Select style={{ width: '100%' }} onChange={(value) => console.log('handleChangeSelect -> ' + value)}>
+                >
+                    <Select placeholder="Elija proveedor" style={{ width: '100%' }} onChange={(value) => console.log('handleChangeSelect -> ' + value)}>
                         {
                             proveedores.map(proveedor => {
                                 return (
@@ -216,7 +230,7 @@ function ProductosForm(props) {
                     name="url"
                     rules={[{ required: true, message: 'Required!' }]}
                 >
-                    <Input />
+                    <Input  placeholder="URL"/>
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

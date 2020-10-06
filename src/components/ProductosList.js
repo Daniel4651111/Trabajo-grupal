@@ -160,7 +160,7 @@ function ProductosList(props) {
                         )
                     })}
                 </Row>
-                <br></br><div align='center'><Pagination defaultCurrent={6} total={50} /></div>
+                <br></br><div align='center'></div>
             </div>
         </div>
 
