@@ -8,9 +8,9 @@ function CategoriasForm(props) {
     const [form] = Form.useForm();
 
     useEffect(() => {
-        console.log(props.match.params.categoriaID)
-        if (props.match.params.productoID) {
-            axios.get('/ws/rest/categorias/' + props.match.params.categoriaID)
+       
+        if (props.match.params.categoriaID) {
+            axios.get('/proyecto_upa/rest/categorias/' + props.match.params.categoriaID)
                 .then((res) => {
                     console.log(res.data);
                     form.setFieldsValue(res.data);
@@ -24,7 +24,7 @@ function CategoriasForm(props) {
     const submit = (categoriaForm) => {
 
         if (props.match.productoID) {
-            axios.put('/ws/rest/categorias/' + props.match.categoriaID, categoriaForm)
+            axios.put('/proyecto_upa/rest/categorias/' + props.match.categoriaID, categoriaForm)
                 .then((res) => {
                     console.log(res);
                     props.history.push('/categorias');
@@ -34,7 +34,7 @@ function CategoriasForm(props) {
                 })
         }
         else {
-            axios.post('/ws/rest/categorias', categoriaForm)
+            axios.post('/proyecto_upa/rest/categorias', categoriaForm)
                 .then((res) => {
                     console.log(res);
                     props.history.push('/categorias');
@@ -56,6 +56,9 @@ function CategoriasForm(props) {
 
     //Diseño del formulario
     return (
+        <div>
+             <h1><b>Cargar un nueva categoría</b></h1>
+       
         <Form
             style={{ width: '60%', margin: '0 auto' }}
             form={form}
@@ -89,6 +92,7 @@ function CategoriasForm(props) {
                 </Row>
             </Form.Item>
         </Form>
+        </div>
     )
 }
 export default CategoriasForm;

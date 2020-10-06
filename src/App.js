@@ -42,7 +42,7 @@ function AppMenu() {
       </SubMenu>
 
 {/* categoria */}
-      <SubMenu key="categorias" icon={<AppstoreOutlined />} title="Categorias">
+      <SubMenu key="categorias" icon={<AppstoreOutlined />} title="Categorías">
         <Menu.Item key="categorias:1"><Link to="/categorias">Categorías</Link></Menu.Item>
         <Menu.Item key="categorias:2"><Link to="/categorias/new">Nueva Categoría</Link></Menu.Item>
       </SubMenu>
