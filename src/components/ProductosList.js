@@ -115,12 +115,12 @@ function ProductosList(props) {
                                         }
                                     >
                                         {/* VER CON CATEGORIA */}
-                                        {/* <div><Tag><FolderOutlined /> {producto.categoria}</Tag></div><br></br>  */}
+                                        <div><Tag><FolderOutlined /> {producto.categoria && producto.categoria.nombre}</Tag></div><br></br>
                                         <Meta
                                             title={producto.nombre}
                                             description={producto.descripcion}
                                         /><br></br>
-                                        {/* <p>{producto.precio_unitario}</p> */}
+                                        <p>{producto.precioUnitario + ' Gs'}</p>
                                         {/* <Button type="primary" onClick={this.toggle}>
                                             Toggle disabled
                                         </Button>

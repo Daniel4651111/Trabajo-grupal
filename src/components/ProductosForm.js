@@ -9,11 +9,12 @@ function ProductosForm(props) {
 
     const [categorias, setCategorias] = useState([]);
     const [proveedores, setProveedores] = useState([]);
+    const [empresas, setEmpresas] = useState([]);
     const [form] = Form.useForm(); //De ANT, por debajo usa useStates
 
     useEffect(() => {
         //Get Categorias
-        axios.get('/ws/rest/categorias')
+        axios.get('/proyecto_upa/rest/categorias')
             .then(res => {
                 setCategorias(res.data)
             })
@@ -22,7 +23,7 @@ function ProductosForm(props) {
             });
 
         //Get Proveedores
-        axios.get('/ws/rest/proveedores')
+        axios.get('/proyecto_upa/rest/proveedores')
             .then(res => {
                 setProveedores(res.data)
             })
@@ -31,7 +32,17 @@ function ProductosForm(props) {
             });
 
         //Get EMPRESA????????
+        axios.get('/proyecto_upa/rest/empresas')
+        .then(res => {
+            setEmpresas(res.data)
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        
+    }, []);
 
+    useEffect(() => {
         console.log(props.match.params.productoID)
         if (props.match.params.productoID) {
             axios.get('/proyecto_upa/rest/productos/' + props.match.params.productoID)
@@ -42,13 +53,14 @@ function ProductosForm(props) {
                     productosForm.proveedor = productosForm.proveedor ? productosForm.proveedor.id : null;
                     productosForm.empresa = productosForm.empresa ? productosForm.empresa.id : null;
                     // form.setFieldsValue(rsp.data); //Rellenar campos
+                    console.log(productosForm)
                     form.setFieldsValue(productosForm); //Rellenar campos                    
                 })
                 .catch((err) => {
                     console.log(err);
                 })
         }
-    }, []);
+    }, [categorias, proveedores])
 
     //Envío del formulario: put o post
     const submit = (productosForm) => {
@@ -182,6 +194,29 @@ function ProductosForm(props) {
                             })
                         }
                     </Select>
+                </Form.Item>
+
+                {/* <Form.Item
+                    label="Empresa:"
+                    name="empresa"
+                    rules={[{ required: true, message: 'Required!' }]}
+                >                    <Select style={{ width: '100%' }} onChange={(value) => console.log('handleChangeSelect -> ' + value)}>
+                        {
+                            empresas.map(empresa => {
+                                return (
+                                    <Option key={empresa.id} value={empresa.id}>{empresa.nombre}</Option>
+                                )
+                            })
+                        }
+                    </Select>
+                </Form.Item> */}
+
+                <Form.Item
+                    label="URL de Imagen:"
+                    name="url"
+                    rules={[{ required: true, message: 'Required!' }]}
+                >
+                    <Input />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
