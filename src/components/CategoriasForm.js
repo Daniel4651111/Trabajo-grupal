@@ -8,7 +8,7 @@ function CategoriasForm(props) {
     const [form] = Form.useForm();
 
     useEffect(() => {
-
+        console.log(props.match.params.categoriaID)
         if (props.match.params.categoriaID) {
             axios.get('/proyecto_upa/rest/categorias/' + props.match.params.categoriaID)
                 .then((res) => {
@@ -20,30 +20,23 @@ function CategoriasForm(props) {
                 })
         }
     }, []);
-
     const submit = (categoriaForm) => {
-
-        if (props.match.productoID) {
-            axios.put('/proyecto_upa/rest/categorias/' + props.match.categoriaID, categoriaForm)
-                .then((res) => {
-                    console.log(res);
-                    props.history.push('/categorias');
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-        }
-        else {
-            axios.post('/proyecto_upa/rest/categorias', categoriaForm)
-                .then((res) => {
-                    console.log(res);
-                    props.history.push('/categorias');
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-        }
+    const { match, history } = props;
+    if (match.params.categoriaID) {
+        axios.put(`/proyecto_upa/rest/categorias/${match.params.categoriaID}`, categoriaForm)
+            .then((rsp) => {
+                alert('Los cambios fueron guardados');
+                console.log(rsp);
+                history.push('/categorias');
+            });
+    } else {
+        axios.post(`/proyecto_upa/rest/categorias`, categoriaForm)
+            .then((rsp) => {
+                alert('');
+                history.push('/categorias');
+            });
     }
+}
 
     const onFinish = values => {
         console.log('Success:', values);
