@@ -74,30 +74,22 @@ function ProductosForm(props) {
         //    id: productosForm.empresa
         //}
         //Actualizar
-        if (props.match.productoID) {
-            axios.put('/proyecto_upa/rest/productos/' + props.match.productoID, productosForm)
-                .then((res) => {
-                    console.log(res);
-                    props.history.push('/productos');
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
+        const { match, history } = props;
+        if (match.params.productoID) {
+            axios.put(`/proyecto_upa/rest/productos/${match.params.productoID}`, productosForm)
+                .then((rsp) => {
+                    alert('exito');
+                    console.log(rsp);
+                    history.push('/productos');
+                });
+        } else {
+            axios.post(`/proyecto_upa/rest/productos`, productosForm)
+                .then((rsp) => {
+                    alert('exito');
+                    history.push('/productos');
+                });
         }
-        //Crear
-        else {
-            axios.post('/proyecto_upa/rest/productos', productosForm)
-                .then((res) => {
-                    console.log(res);
-                    alert('exito')
-                    props.history.push('/productos');
-                })
-                .catch((err) => {
-                    console.log(err);
-                    alert('exito')
-                    props.history.push('/productos');
-                })
-        }
+        
     }
 
     const onFinish = values => {

@@ -160,10 +160,10 @@ function ProductosList(props) {
                         )
                     })}
                 </Row>
-                <br></br><div align='center'></div>
             </div>
+            <br></br>
+            
         </div>
-
     )
 }
 export default ProductosList;
