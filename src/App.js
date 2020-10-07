@@ -14,10 +14,9 @@ import ProveedoresList from './components/ProveedoresList';
 import Contactos from './components/Contactos';
 import About from './components/About';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, CommentOutlined, HomeOutlined, PhoneOutlined, SearchOutlined, ShoppingOutlined, SmileOutlined, TeamOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import moment from 'moment';
-
 
 
 const { SubMenu } = Menu;
@@ -29,7 +28,7 @@ function AppMenu() {
 
     // DEFINICION DE LA ESTRUCTURA DEL MENU PRINCIPAL - BARRA DE ARRIBA
     <Menu onClick={(value) => setCurrent(value)} selectedKeys={[current]} mode="horizontal">
-      <Menu.Item key="home" icon={<AppstoreOutlined />}>
+      <Menu.Item key="home" icon={<HomeOutlined />}>
         <Link to="/">Home</Link>
       </Menu.Item>
 
@@ -38,7 +37,7 @@ function AppMenu() {
         <Menu.Item key="tasks:2"><Link to="/tasks/new">New Task</Link></Menu.Item>
       </SubMenu> */}
 
-      <SubMenu key="productos" icon={<AppstoreOutlined />} title="Productos">
+      <SubMenu key="productos" icon={<ShoppingOutlined />} title="Productos">
         <Menu.Item key="productos:1"><Link to="/productos">Productos</Link></Menu.Item>
         <Menu.Item key="productos:2"><Link to="/productos/new">Nuevo Producto</Link></Menu.Item>
       </SubMenu>
@@ -50,15 +49,16 @@ function AppMenu() {
       </SubMenu>
 
       {/* proveedores*/}
-      <SubMenu key="proveedores" icon={<AppstoreOutlined />} title="Proveedores">
+      <SubMenu key="proveedores" icon={<TeamOutlined />} title="Proveedores">
         <Menu.Item key="proveedores:1"><Link to="/proveedores">Lista de proveedores</Link></Menu.Item>
       </SubMenu>
 
+    
 
-      <Menu.Item key="contactos" icon={<AppstoreOutlined />}>
+      <Menu.Item key="contactos" icon={<PhoneOutlined />}>
         <Link to="/contactos">Contactos</Link>
       </Menu.Item>
-      <Menu.Item key="about" icon={<AppstoreOutlined />}>
+      <Menu.Item key="about" icon={<CommentOutlined />}>
         <Link to="/about">About</Link>
       </Menu.Item>
     </Menu>
@@ -148,9 +148,9 @@ function App(props) {
         return (          
           <Layout>
             
-            <Header style={{ color: 'white', fontSize: 30, textAlign: 'center' }}>
-              <div>{empresa.nombre}</div>
-            </Header>
+            < div className= "header" >
+          <div style={{ color: 'black', fontSize: 30, textAlign: 'center' }}><h2>DAS KAUFHAUS</h2></div>
+        </div>
 
             <Content>
               <div className="site-layout-content">
